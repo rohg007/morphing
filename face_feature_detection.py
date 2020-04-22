@@ -4,7 +4,6 @@ import cv2
 def get_control_points(img_path):
 
     def draw_circle(event, x, y, flags, param):
-        global mouseX, mouseY
         if event == cv2.EVENT_LBUTTONDBLCLK:
             cv2.circle(img, (x, y), 3, (255, 0, 0), -1)
             vec.append((x, y))
