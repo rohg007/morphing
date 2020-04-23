@@ -1,18 +1,23 @@
 import cv2
 
 
-def triangulate(img, vec):
+def get_triangle_list(img, vec):
     size = img.shape
     rect = (0, 0, size[1], size[0])
     sd = cv2.Subdiv2D(rect)
     for p in vec:
         sd.insert(p)
     sd.insert((0, 0))
-    sd.insert((511, 0))
-    sd.insert((0, 511))
-    sd.insert((511, 511))
+    sd.insert((size[1] - 1, 0))
+    sd.insert((0, size[0] - 1))
+    sd.insert((size[1] - 1, size[0] - 1))
     triangles = sd.getTriangleList()
-    print(triangles)
+    return triangles
+
+
+def triangulate(img, vec):
+    triangles = get_triangle_list(img, vec)
+    # print(triangles)
     for t in triangles:
         p1 = (t[0], t[1])
         p2 = (t[2], t[3])

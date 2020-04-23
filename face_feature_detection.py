@@ -9,7 +9,7 @@ def get_control_points(img_path):
             vec.append((x, y))
     vec = []
     img = cv2.imread(img_path)
-    img = cv2.resize(img, (512, 512))
+    # img = cv2.resize(img, (512, 512))
     cv2.namedWindow('image')
     cv2.setMouseCallback('image', draw_circle)
     while 1:
