@@ -60,10 +60,19 @@ for i in range(1, 11):
             x2 = tri[ind][2][0]
             y2 = tri[ind][2][1]
 
+            print("k l")
+            print(k, l)
+
+            print("Triangle List")
+            print(tri[ind])
+
             print("Alpha Beta")
             alpha = (((x2 - x0) * (l - y0) - (k - x0) * (y2 - y0)) / ((x2 - x0) * (y1 - y0) - (x1 - x0) * (y2 - y0)))
             beta = (((x1 - x0) * (l - y0) - (k - x0) * (y1 - y0)) / ((x1 - x0) * (y2 - y0) - (x2 - x0) * (y1 - y0)))
             print(alpha, beta)
+
+            print("Source Triangle")
+            print(triA[ind])
 
             print("xs ys")
             xs = triA[ind][0][0] + alpha * (triA[ind][1][0] - triA[ind][0][0]) + beta * (triA[ind][2][0] - triA[ind][0][0])
@@ -71,6 +80,9 @@ for i in range(1, 11):
             xs = int(round(xs))
             ys = int(round(ys))
             print(xs, ys)
+
+            print("Destination Triangle")
+            print(triB[ind])
 
             print("xd yd")
             xd = triB[ind][0][0] + alpha * (triB[ind][1][0] - triB[ind][0][0]) + beta * (triB[ind][2][0] - triB[ind][0][0])

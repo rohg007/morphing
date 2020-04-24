@@ -25,6 +25,7 @@ def triangulate(img, vec):
         temp.append(p1)
         temp.append(p2)
         temp.append(p3)
+        temp.sort()
         triangleList.append(temp)
 
     cv2.imshow("Triangulated Image", img)
