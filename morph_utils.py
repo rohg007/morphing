@@ -18,6 +18,8 @@ def is_inside(x1, y1, x2, y2, x3, y3, x, y):
 
 
 def get_triangle(triangles, x, y):
+    c=0
     for t in triangles:
-        if is_inside(t[0], t[1], t[2], t[3], t[4], t[5], x, y):
-            return t
+        if is_inside(t[0][0], t[1][1], t[1][0], t[1][1], t[2][0], t[2][1], x, y):
+            return c
+        c=c+1
