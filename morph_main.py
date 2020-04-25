@@ -25,7 +25,6 @@ img_dest = cv2.resize(img_dest, (256, 256))
 img_dest2 = cv2.resize(img_dest, (256, 256))
 
 # getting control points for each image through mouse clicks
-vecA = [(0, 0), (0, 255), (255, 0), (255, 255)]
 vecA = get_control_points(src_path)
 print(vecA)
 
@@ -40,7 +39,7 @@ triA.sort()
 vecB = get_control_points(dest_path)
 triB = triangulate(img_dest2, vecB)
 display("Triangulated Bush", img_dest2)
-cv2.imwrite("triangulated_bush.jpg", img_dest)
+cv2.imwrite("triangulated_bush.jpg", img_dest2)
 triB.sort()
 
 # list to store file names of intermediate frames
@@ -123,4 +122,3 @@ for i in range(num_iterations):
     out.write(img)
 out.write(img_dest)
 out.release()
-

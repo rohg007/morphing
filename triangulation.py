@@ -11,9 +11,9 @@ def triangulate(img, vec):
 
     # acknowledging border points
     sd.insert((0, 0))
-    sd.insert((size[1]-1, 0))
-    sd.insert((0, size[0]-1))
-    sd.insert((size[1]-1, size[0]-1))
+    sd.insert((size[1] - 1, 0))
+    sd.insert((0, size[0] - 1))
+    sd.insert((size[1] - 1, size[0] - 1))
     triangles = sd.getTriangleList()
     triangleList = []
     for t in triangles:
