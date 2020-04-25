@@ -12,39 +12,42 @@ def display(window, img):
     cv2.destroyAllWindows()
 
 
+src_path = 'Clinton.jpg'
+dest_path = 'Bush.jpg'
 # Reading both images and resizing them to a same size
-img_src = cv2.imread('Bush.jpg')
-img_src2 = cv2.imread('Bush.jpg')
+img_src = cv2.imread(src_path)
+img_src2 = cv2.imread(src_path)
 img_src = cv2.resize(img_src, (256, 256))
 img_src2 = cv2.resize(img_src, (256, 256))
-img_dest = cv2.imread('Clinton.jpg')
-img_dest2 = cv2.imread('Clinton.jpg')
+img_dest = cv2.imread(dest_path)
+img_dest2 = cv2.imread(dest_path)
 img_dest = cv2.resize(img_dest, (256, 256))
 img_dest2 = cv2.resize(img_dest, (256, 256))
 
 # getting control points for each image through mouse clicks
-vecA = get_control_points('Bush.jpg')
+vecA = [(0, 0), (0, 255), (255, 0), (255, 255)]
+vecA = get_control_points(src_path)
 print(vecA)
 
 # triangulating image and getting the list of triangle's vertices
 triA = triangulate(img_src2, vecA)
-display("Triangulated Bush", img_src2)
-cv2.imwrite("triangulated_bush.jpg", img_src2)
+display("Triangulated Clinton", img_src2)
+cv2.imwrite("triangulated_clinton.jpg", img_src2)
 
 # sorting triangle list to map triangles correctly in further steps
 triA.sort()
 
-vecB = get_control_points('Clinton.jpg')
+vecB = get_control_points(dest_path)
 triB = triangulate(img_dest2, vecB)
 display("Triangulated Bush", img_dest2)
-cv2.imwrite("triangulated_clinton.jpg", img_dest2)
+cv2.imwrite("triangulated_bush.jpg", img_dest)
 triB.sort()
 
 # list to store file names of intermediate frames
 outp = []
 
 # number of steps
-num_iterations = 50
+num_iterations = 80
 
 # generates file name for intermediate frame - inm_bush2clinton(step#).jpg
 for i in range(0, num_iterations + 1):
@@ -111,3 +114,13 @@ for i in range(1, num_iterations + 1):
     # saving the intermediate frame
     cv2.imwrite(outp[i], int_frm)
     print(i)
+
+out = cv2.VideoWriter('temp.avi', cv2.VideoWriter_fourcc(*'DIVX'), 40, (256, 256))
+out.write(img_src)
+for i in range(num_iterations):
+    s = 'inm_bush2clinton' + str(i + 1) + '.jpg'
+    img = cv2.imread(s)
+    out.write(img)
+out.write(img_dest)
+out.release()
+
